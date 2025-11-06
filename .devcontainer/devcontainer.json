@@ -1,0 +1,23 @@
+{
+   "name": "Text Project Dev Container",
+   "build": {
+      "dockerfile": "../Dockerfile",
+      "context": ".."
+   },
+   "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash",
+      "cmake.configureOnOpen": true,
+      "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+   },
+   "extensions": [
+      "ms-vscode.cpptools-extension-pack",
+      "ms-vscode.cmake-tools",
+      "twxs.cmake",
+      "eamodio.gitlens"
+   ],
+   "workspaceFolder": "/app",
+   "mounts": [
+      "source=${localWorkspaceFolder},target=/app,type=bind"
+   ],
+   "remoteUser": "root"
+}

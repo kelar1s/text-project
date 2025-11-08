@@ -1,13 +1,26 @@
-# CMake build
+# --- CMake build artifacts ---
 /build/
+/out/
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+compile_commands.json
 
-# IDE
+# --- IDE / Editor settings ---
 .vscode/
 .idea/
+*.code-workspace
 
-# System
+# --- OS / System files ---
 .DS_Store
+Thumbs.db
+
+# --- Containers / Environment ---
+*.env
+*.log
+
+# --- Backup / Temp files ---
+*~
+*.swp
+*.bak

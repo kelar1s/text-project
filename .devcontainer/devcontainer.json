@@ -15,9 +15,9 @@
       "twxs.cmake",
       "eamodio.gitlens"
    ],
-   "workspaceFolder": "/app",
+   "workspaceFolder": "/text-project",
    "mounts": [
-      "source=${localWorkspaceFolder},target=/app,type=bind"
+      "source=${localWorkspaceFolder},target=/text-project,type=bind"
    ],
    "remoteUser": "root"
 }

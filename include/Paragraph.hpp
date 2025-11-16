@@ -4,5 +4,5 @@
 class Paragraph : public TextNodeBase
 {
 public:
-   using TextNodeBase::TextNodeBase;
+   Paragraph(const std::string &title = "Paragraph") : TextNodeBase(title) {}
 };

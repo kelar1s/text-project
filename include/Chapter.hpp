@@ -4,5 +4,5 @@
 class Chapter : public TextNodeBase
 {
 public:
-   using TextNodeBase::TextNodeBase;
+   Chapter(const std::string &title = "Chapter") : TextNodeBase(title) {}
 };

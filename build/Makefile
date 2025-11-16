@@ -129,6 +129,30 @@ text_project/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/build
 .PHONY : text_project/fast
 
+src/TextNodeBase.o: src/TextNodeBase.cpp.o
+.PHONY : src/TextNodeBase.o
+
+# target to build an object file
+src/TextNodeBase.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextNodeBase.cpp.o
+.PHONY : src/TextNodeBase.cpp.o
+
+src/TextNodeBase.i: src/TextNodeBase.cpp.i
+.PHONY : src/TextNodeBase.i
+
+# target to preprocess a source file
+src/TextNodeBase.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextNodeBase.cpp.i
+.PHONY : src/TextNodeBase.cpp.i
+
+src/TextNodeBase.s: src/TextNodeBase.cpp.s
+.PHONY : src/TextNodeBase.s
+
+# target to generate assembly for a file
+src/TextNodeBase.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextNodeBase.cpp.s
+.PHONY : src/TextNodeBase.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... text_project"
+	@echo "... src/TextNodeBase.o"
+	@echo "... src/TextNodeBase.i"
+	@echo "... src/TextNodeBase.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

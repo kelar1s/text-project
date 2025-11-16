@@ -4,5 +4,5 @@
 class Part : public TextNodeBase
 {
 public:
-   using TextNodeBase::TextNodeBase;
+   Part(const std::string &title = "Part") : TextNodeBase(title) {}
 };

@@ -81,12 +81,12 @@ clean: CMakeFiles/text_project.dir/clean
 CMakeFiles/text_project.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/text-project/build/CMakeFiles --progress-num=1,2 "Built target text_project"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/text-project/build/CMakeFiles --progress-num=1,2,3 "Built target text_project"
 .PHONY : CMakeFiles/text_project.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/text_project.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /text-project/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /text-project/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/text_project.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /text-project/build/CMakeFiles 0
 .PHONY : CMakeFiles/text_project.dir/rule

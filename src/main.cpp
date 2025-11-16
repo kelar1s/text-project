@@ -47,7 +47,7 @@ int main()
     std::cout << " - Удаляем PART2" << std::endl;
     doc->removeChild(1);
 
-    std::cout << " - Послу удаления - " << std::endl;
+    std::cout << " - После удаления - " << std::endl;
     std::cout << doc->toString() << std::endl;
 
     delete doc;

@@ -9,69 +9,17 @@ protected:
    std::vector<ITextNode *> children;
 
 public:
-   TextNodeBase(const std::string &str = "") : title(str) {}
+   TextNodeBase(const std::string &str = "");
 
-   virtual ~TextNodeBase() override
-   {
-      for (ITextNode *child : children)
-      {
-         delete child;
-      }
-   }
+   virtual ~TextNodeBase() override;
 
-   TextNodeBase(const TextNodeBase &) = delete;
-   TextNodeBase &operator=(const TextNodeBase &) = delete;
-   TextNodeBase(TextNodeBase &&) = delete;
-   TextNodeBase &operator=(TextNodeBase &&) = delete;
+   void addChild(ITextNode *child) override;
+   void removeChild(size_t index) override;
+   ITextNode *getChild(size_t index) override;
+   size_t childCount() const override;
 
-   virtual void addChild(ITextNode *child) override
-   {
-      if (child)
-      {
-         children.push_back(child);
-      }
-   }
+   void setTitle(const std::string &str);
+   const std::string getTitle();
 
-   virtual void removeChild(size_t index) override
-   {
-      if (index < children.size())
-      {
-         delete children[index];
-         children.erase(children.begin() + index);
-      }
-   }
-
-   virtual ITextNode *getChild(size_t index) override
-   {
-      if (index >= children.size())
-      {
-         throw -1;
-      }
-      return children[index];
-   }
-
-   virtual void setTitle(const std::string &str)
-   {
-      title = str;
-   }
-
-   virtual const std::string getTitle()
-   {
-      return title;
-   }
-
-   virtual std::string toString(size_t indent = 0) const override
-   {
-      std::string result(indent, ' ');
-      result += "+ " + title + "\n";
-
-      for (const ITextNode *child : children)
-      {
-         if (child)
-         {
-            result += child->toString(indent + 2);
-         }
-      }
-      return result;
-   }
+   std::string toString(size_t indent = 0) const override;
 };

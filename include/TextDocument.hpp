@@ -4,5 +4,5 @@
 class TextDocument : public TextNodeBase
 {
 public:
-   using TextNodeBase::TextNodeBase;
+   TextDocument(const std::string &title = "Document") : TextNodeBase(title) {}
 };

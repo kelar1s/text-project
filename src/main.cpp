@@ -1,56 +1,54 @@
+#include "TextNode.hpp"
 #include <iostream>
-#include "TextDocument.hpp"
-#include "Part.hpp"
-#include "Chapter.hpp"
-#include "Section.hpp"
-#include "Paragraph.hpp"
-#include "Sentence.hpp"
 
 int main()
 {
-    ITextNode *doc = new TextDocument("DOCC");
+   TextNode *doc = new TextNode("Документ");
 
-    doc->addChild(new Part("PART1"));
+   TextNode *chapter1 = new TextNode("Глава 1");
+   TextNode *chapter2 = new TextNode("Глава 2");
 
-    ITextNode *part1 = doc->getChild(0);
-    if (part1)
-    {
-        part1->addChild(new Chapter("CHAPTER1"));
+   doc->addDown(chapter1);
+   doc->addDown(chapter2);
 
-        ITextNode *ch1 = part1->getChild(0);
-        if (ch1)
-        {
-            ch1->addChild(new Section("SECTION1"));
-            ITextNode *s1_1 = ch1->getChild(0);
+   TextNode *section11 = new TextNode("Раздел 1.1");
+   TextNode *section12 = new TextNode("Раздел 1.2");
 
-            s1_1->addChild(new Paragraph("PARAGRAPH1"));
-            s1_1->getChild(0)->addChild(new Sentence("SENTENCE1"));
-            s1_1->getChild(0)->addChild(new Sentence("SENTENCE2"));
+   TextNode *section21 = new TextNode("Раздел 2.1");
+   TextNode *section22 = new TextNode("Раздел 2.2");
 
-            s1_1->addChild(new Paragraph("PARAGRAPH2"));
-            s1_1->getChild(1)->addChild(new Sentence("SENTENCE1"));
-        }
-    }
+   chapter1->addDown(section11);
+   chapter1->addDown(section12);
 
-    doc->addChild(new Part("PART2"));
-    ITextNode *part2 = doc->getChild(1);
-    if (part2)
-    {
-        part2->addChild(new Chapter("CHAPTER2"));
-        part2->getChild(0)->addChild(new Paragraph("PARAGRAPH1"));
-        part2->getChild(0)->getChild(0)->addChild(new Sentence("SENTENCE1"));
-    }
+   chapter2->addDown(section21);
+   chapter2->addDown(section22);
 
-    std::cout << " - Содержимое - " << std::endl;
-    std::cout << doc->toString() << std::endl;
+   TextNode *p1 = new TextNode("Абзац 1.1");
+   TextNode *p2 = new TextNode("Абзац 1.2");
 
-    std::cout << " - Удаляем PART2" << std::endl;
-    doc->removeChild(1);
+   TextNode *p3 = new TextNode("Абзац 2.1");
+   TextNode *p4 = new TextNode("Абзац 3.1");
 
-    std::cout << " - После удаления - " << std::endl;
-    std::cout << doc->toString() << std::endl;
+   section11->addDown(p1);
+   section11->addDown(p2);
 
-    delete doc;
+   section21->addDown(p3);
+   section21->addDown(p4);
 
-    return 0;
+   TextNode *s1 = new TextNode("Предложение 1");
+   TextNode *s2 = new TextNode("Предложение 2");
+   TextNode *s3 = new TextNode("Предложение 3");
+   TextNode *s4 = new TextNode("Предложение 4");
+   TextNode *s5 = new TextNode("Предложение 5");
+
+   p1->addDown(s1);
+   p1->addDown(s2);
+   p1->addDown(s3);
+   p3->addDown(s4);
+   p4->addDown(s5);
+
+   std::cout << doc->toString();
+
+   delete doc;
+   return 0;
 }

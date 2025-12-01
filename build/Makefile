@@ -129,6 +129,30 @@ text_project/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/build
 .PHONY : text_project/fast
 
+src/TextIterator.o: src/TextIterator.cpp.o
+.PHONY : src/TextIterator.o
+
+# target to build an object file
+src/TextIterator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextIterator.cpp.o
+.PHONY : src/TextIterator.cpp.o
+
+src/TextIterator.i: src/TextIterator.cpp.i
+.PHONY : src/TextIterator.i
+
+# target to preprocess a source file
+src/TextIterator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextIterator.cpp.i
+.PHONY : src/TextIterator.cpp.i
+
+src/TextIterator.s: src/TextIterator.cpp.s
+.PHONY : src/TextIterator.s
+
+# target to generate assembly for a file
+src/TextIterator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextIterator.cpp.s
+.PHONY : src/TextIterator.cpp.s
+
 src/TextNode.o: src/TextNode.cpp.o
 .PHONY : src/TextNode.o
 
@@ -186,6 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... text_project"
+	@echo "... src/TextIterator.o"
+	@echo "... src/TextIterator.i"
+	@echo "... src/TextIterator.s"
 	@echo "... src/TextNode.o"
 	@echo "... src/TextNode.i"
 	@echo "... src/TextNode.s"

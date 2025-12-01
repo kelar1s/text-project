@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/text_project.dir/src/TextIterator.cpp.o"
+  "CMakeFiles/text_project.dir/src/TextIterator.cpp.o.d"
   "CMakeFiles/text_project.dir/src/TextNode.cpp.o"
   "CMakeFiles/text_project.dir/src/TextNode.cpp.o.d"
   "CMakeFiles/text_project.dir/src/main.cpp.o"

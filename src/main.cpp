@@ -47,7 +47,14 @@ int main()
    p3->addDown(s4);
    p4->addDown(s5);
 
-   std::cout << doc->toString();
+   std::cout << doc->toString(0);
+
+   // TextIterator ti(doc);
+
+   // for (TextIterator ti = doc->begin(); ti != doc->end(); ++ti)
+   // {
+   //    std::cout << ti->getText() << "\n";
+   // }
 
    delete doc;
    return 0;

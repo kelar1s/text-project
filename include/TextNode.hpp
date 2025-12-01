@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "TextIterator.hpp"
 
 class TextNode
 {
@@ -19,4 +20,14 @@ public:
    void addDown(TextNode *node);
 
    std::string toString(size_t indent = 0) const;
+
+   TextIterator begin()
+   {
+      return TextIterator(this);
+   }
+
+   TextIterator end()
+   {
+      return TextIterator(nullptr);
+   }
 };

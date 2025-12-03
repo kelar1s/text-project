@@ -4,30 +4,19 @@
 
 class TextNode
 {
-   std::string text;
+   friend class TextTree;
+   friend class TextIterator;
 
-public:
+   std::string text;
    TextNode *pNext;
    TextNode *pDown;
 
-   TextNode(const std::string &_text = "");
-   ~TextNode();
+   TextNode(const std::string &_text = "") : text(_text), pNext(nullptr), pDown(nullptr) {}
 
-   const std::string getText() const;
-   void setText(const std::string &_text);
-
-   void addNext(TextNode *node);
-   void addDown(TextNode *node);
-
-   std::string toString(size_t indent = 0) const;
-
-   TextIterator begin()
+public:
+   const std::string &getText() const { return text; }
+   void setText(const std::string &_text = "")
    {
-      return TextIterator(this);
-   }
-
-   TextIterator end()
-   {
-      return TextIterator(nullptr);
+      text = _text;
    }
 };

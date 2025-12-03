@@ -83,19 +83,19 @@ CMakeFiles/text_project.dir/src/TextIterator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/text_project.dir/src/TextIterator.cpp.s"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /text-project/src/TextIterator.cpp -o CMakeFiles/text_project.dir/src/TextIterator.cpp.s
 
-CMakeFiles/text_project.dir/src/TextNode.cpp.o: CMakeFiles/text_project.dir/flags.make
-CMakeFiles/text_project.dir/src/TextNode.cpp.o: /text-project/src/TextNode.cpp
-CMakeFiles/text_project.dir/src/TextNode.cpp.o: CMakeFiles/text_project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/text-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/text_project.dir/src/TextNode.cpp.o"
-	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_project.dir/src/TextNode.cpp.o -MF CMakeFiles/text_project.dir/src/TextNode.cpp.o.d -o CMakeFiles/text_project.dir/src/TextNode.cpp.o -c /text-project/src/TextNode.cpp
+CMakeFiles/text_project.dir/src/TextTree.cpp.o: CMakeFiles/text_project.dir/flags.make
+CMakeFiles/text_project.dir/src/TextTree.cpp.o: /text-project/src/TextTree.cpp
+CMakeFiles/text_project.dir/src/TextTree.cpp.o: CMakeFiles/text_project.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/text-project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/text_project.dir/src/TextTree.cpp.o"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/text_project.dir/src/TextTree.cpp.o -MF CMakeFiles/text_project.dir/src/TextTree.cpp.o.d -o CMakeFiles/text_project.dir/src/TextTree.cpp.o -c /text-project/src/TextTree.cpp
 
-CMakeFiles/text_project.dir/src/TextNode.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/text_project.dir/src/TextNode.cpp.i"
-	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /text-project/src/TextNode.cpp > CMakeFiles/text_project.dir/src/TextNode.cpp.i
+CMakeFiles/text_project.dir/src/TextTree.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/text_project.dir/src/TextTree.cpp.i"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /text-project/src/TextTree.cpp > CMakeFiles/text_project.dir/src/TextTree.cpp.i
 
-CMakeFiles/text_project.dir/src/TextNode.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/text_project.dir/src/TextNode.cpp.s"
-	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /text-project/src/TextNode.cpp -o CMakeFiles/text_project.dir/src/TextNode.cpp.s
+CMakeFiles/text_project.dir/src/TextTree.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/text_project.dir/src/TextTree.cpp.s"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /text-project/src/TextTree.cpp -o CMakeFiles/text_project.dir/src/TextTree.cpp.s
 
 CMakeFiles/text_project.dir/src/main.cpp.o: CMakeFiles/text_project.dir/flags.make
 CMakeFiles/text_project.dir/src/main.cpp.o: /text-project/src/main.cpp
@@ -114,14 +114,14 @@ CMakeFiles/text_project.dir/src/main.cpp.s: cmake_force
 # Object files for target text_project
 text_project_OBJECTS = \
 "CMakeFiles/text_project.dir/src/TextIterator.cpp.o" \
-"CMakeFiles/text_project.dir/src/TextNode.cpp.o" \
+"CMakeFiles/text_project.dir/src/TextTree.cpp.o" \
 "CMakeFiles/text_project.dir/src/main.cpp.o"
 
 # External object files for target text_project
 text_project_EXTERNAL_OBJECTS =
 
 text_project: CMakeFiles/text_project.dir/src/TextIterator.cpp.o
-text_project: CMakeFiles/text_project.dir/src/TextNode.cpp.o
+text_project: CMakeFiles/text_project.dir/src/TextTree.cpp.o
 text_project: CMakeFiles/text_project.dir/src/main.cpp.o
 text_project: CMakeFiles/text_project.dir/build.make
 text_project: CMakeFiles/text_project.dir/link.txt

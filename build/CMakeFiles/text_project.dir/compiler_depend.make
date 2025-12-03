@@ -151,9 +151,10 @@ CMakeFiles/text_project.dir/src/TextIterator.cpp.o: /text-project/src/TextIterat
   /usr/lib/gcc/aarch64-linux-gnu/14/include/stdarg.h \
   /usr/lib/gcc/aarch64-linux-gnu/14/include/stddef.h
 
-CMakeFiles/text_project.dir/src/TextNode.cpp.o: /text-project/src/TextNode.cpp \
+CMakeFiles/text_project.dir/src/TextTree.cpp.o: /text-project/src/TextTree.cpp \
   /text-project/include/TextIterator.hpp \
   /text-project/include/TextNode.hpp \
+  /text-project/include/TextTree.hpp \
   /usr/include/aarch64-linux-gnu/asm/errno.h \
   /usr/include/aarch64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/aarch64-linux-gnu/bits/byteswap.h \
@@ -304,6 +305,7 @@ CMakeFiles/text_project.dir/src/TextNode.cpp.o: /text-project/src/TextNode.cpp \
 CMakeFiles/text_project.dir/src/main.cpp.o: /text-project/src/main.cpp \
   /text-project/include/TextIterator.hpp \
   /text-project/include/TextNode.hpp \
+  /text-project/include/TextTree.hpp \
   /usr/include/aarch64-linux-gnu/asm/errno.h \
   /usr/include/aarch64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/aarch64-linux-gnu/bits/byteswap.h \
@@ -543,7 +545,9 @@ CMakeFiles/text_project.dir/src/main.cpp.o: /text-project/src/main.cpp \
 
 /usr/include/aarch64-linux-gnu/bits/sched.h:
 
-/text-project/src/TextNode.cpp:
+/text-project/include/TextTree.hpp:
+
+/text-project/src/TextTree.cpp:
 
 /usr/lib/gcc/aarch64-linux-gnu/14/include/stddef.h:
 

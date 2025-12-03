@@ -1,6 +1,24 @@
 #include "TextIterator.hpp"
 #include "TextNode.hpp"
 
+bool TextIterator::operator==(const TextIterator &oth) const
+{
+   return pCurr == oth.pCurr;
+}
+bool TextIterator::operator!=(const TextIterator &oth) const
+{
+   return pCurr != oth.pCurr;
+}
+
+TextNode &TextIterator::operator*() const
+{
+   return *pCurr;
+}
+TextNode *TextIterator::operator->() const
+{
+   return pCurr;
+}
+
 TextIterator &TextIterator::operator++()
 {
    if (pCurr == nullptr)

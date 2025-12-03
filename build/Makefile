@@ -153,29 +153,29 @@ src/TextIterator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextIterator.cpp.s
 .PHONY : src/TextIterator.cpp.s
 
-src/TextNode.o: src/TextNode.cpp.o
-.PHONY : src/TextNode.o
+src/TextTree.o: src/TextTree.cpp.o
+.PHONY : src/TextTree.o
 
 # target to build an object file
-src/TextNode.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextNode.cpp.o
-.PHONY : src/TextNode.cpp.o
+src/TextTree.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextTree.cpp.o
+.PHONY : src/TextTree.cpp.o
 
-src/TextNode.i: src/TextNode.cpp.i
-.PHONY : src/TextNode.i
+src/TextTree.i: src/TextTree.cpp.i
+.PHONY : src/TextTree.i
 
 # target to preprocess a source file
-src/TextNode.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextNode.cpp.i
-.PHONY : src/TextNode.cpp.i
+src/TextTree.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextTree.cpp.i
+.PHONY : src/TextTree.cpp.i
 
-src/TextNode.s: src/TextNode.cpp.s
-.PHONY : src/TextNode.s
+src/TextTree.s: src/TextTree.cpp.s
+.PHONY : src/TextTree.s
 
 # target to generate assembly for a file
-src/TextNode.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextNode.cpp.s
-.PHONY : src/TextNode.cpp.s
+src/TextTree.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/text_project.dir/build.make CMakeFiles/text_project.dir/src/TextTree.cpp.s
+.PHONY : src/TextTree.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -213,9 +213,9 @@ help:
 	@echo "... src/TextIterator.o"
 	@echo "... src/TextIterator.i"
 	@echo "... src/TextIterator.s"
-	@echo "... src/TextNode.o"
-	@echo "... src/TextNode.i"
-	@echo "... src/TextNode.s"
+	@echo "... src/TextTree.o"
+	@echo "... src/TextTree.i"
+	@echo "... src/TextTree.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

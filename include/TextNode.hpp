@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "TextIterator.hpp"
 
 class TextNode
 {

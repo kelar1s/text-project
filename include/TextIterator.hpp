@@ -3,20 +3,20 @@
 
 class TextNode;
 
-class TextIterator
-{
-   TextNode *pCurr;
-   std::stack<TextNode *> stack;
+class TextIterator {
+   TextNode* pCurr;
 
-public:
-   TextIterator(TextNode *root = nullptr) : pCurr(root) {}
-   TextIterator(const TextIterator &ti) : pCurr(ti.pCurr), stack(ti.stack) {}
+   std::stack<TextNode*> stack;
 
-   bool operator==(const TextIterator &oth) const;
-   bool operator!=(const TextIterator &oth) const;
+  public:
+   TextIterator(TextNode* root = nullptr) : pCurr(root) {}
+   TextIterator(const TextIterator& ti) : pCurr(ti.pCurr), stack(ti.stack) {}
 
-   TextNode &operator*() const;
-   TextNode *operator->() const;
+   bool operator==(const TextIterator& oth) const;
+   bool operator!=(const TextIterator& oth) const;
 
-   TextIterator &operator++();
+   TextNode& operator*() const;
+   TextNode* operator->() const;
+
+   TextIterator& operator++();
 };

@@ -1,5 +1,7 @@
 #include "TextTree.hpp"
 
+#include <string>
+
 TextTree::~TextTree() { removeNodeWithAllDependencies(pRoot); }
 
 void TextTree::removeNodeWithAllDependencies(TextNode* tNode) {
@@ -21,7 +23,7 @@ TextNode* TextTree::setRoot(const std::string& _text) {
    return pRoot;
 }
 
-TextNode* TextTree::addNext(TextNode* parent, const std::string& _text) {
+TextNode* TextTree::addNextBack(TextNode* parent, const std::string& _text) {
    if (parent == nullptr || parent == pRoot) {
       throw -1;
    }
@@ -34,7 +36,7 @@ TextNode* TextTree::addNext(TextNode* parent, const std::string& _text) {
    return current->pNext;
 }
 
-TextNode* TextTree::addDown(TextNode* parent, const std::string& _text) {
+TextNode* TextTree::addDownBack(TextNode* parent, const std::string& _text) {
    if (parent == nullptr) {
       throw -1;
    }
@@ -61,8 +63,10 @@ std::string TextTree::recursivePrint(const TextNode* tNode,
       return "";
    }
 
-   std::string res(indent, ' ');
-   res += "- " + tNode->text + "\n";
+   std::string res = "";
+   res.append(indent, ' ');
+   res += "- ";
+   res += tNode->text + "\n";
 
    if (tNode->pDown) {
       res += recursivePrint(tNode->pDown, indent + 2);
@@ -76,7 +80,7 @@ std::string TextTree::recursivePrint(const TextNode* tNode,
 }
 
 TextNode** TextTree::findPointerTo(TextNode** currNode, TextNode* targetNode) {
-   if (currNode == nullptr) {
+   if (currNode == nullptr || *currNode == nullptr) {
       return nullptr;
    }
    if (*currNode == targetNode) {
@@ -118,39 +122,38 @@ void TextTree::removeNodeUpChildren(TextNode* targetNode) {
    if (targetNode->pDown == nullptr) {
       *pointerToTarget = targetNode->pNext;
    } else {
-      TextNode* targetNodeChild = targetNode->pDown;
-      while (targetNodeChild->pNext != nullptr) {
-         targetNodeChild = targetNodeChild->pNext;
+      TextNode* lastChild = targetNode->pDown;
+      while (lastChild->pNext != nullptr) {
+         lastChild = lastChild->pNext;
       }
       *pointerToTarget = targetNode->pDown;
-      targetNodeChild->pNext = targetNode->pNext;
+      lastChild->pNext = targetNode->pNext;
    }
    targetNode->pDown = nullptr;
    targetNode->pNext = nullptr;
    delete targetNode;
 }
 
-TextNode* TextTree::findpPredecessor(TextNode* currNode, TextNode* targetNode) {
+TextNode* TextTree::findPredecessor(TextNode* currNode, TextNode* targetNode) {
    if (!currNode || !targetNode || currNode == targetNode) return nullptr;
 
    if (currNode->pDown == targetNode) return currNode;
    if (currNode->pNext == targetNode) return currNode;
 
-   TextNode* res = findpPredecessor(currNode->pDown, targetNode);
+   TextNode* res = findPredecessor(currNode->pDown, targetNode);
    if (res) return res;
 
-   return findpPredecessor(currNode->pNext, targetNode);
+   return findPredecessor(currNode->pNext, targetNode);
 }
 
 void TextTree::removeNodeAdoptChildren(TextNode* targetNode) {
    if (targetNode == nullptr || targetNode == pRoot) {
       throw -1;
    }
-   TextNode** pointerToTarget = findPointerTo(&pRoot, targetNode);
-   if (pointerToTarget == nullptr) {
+   TextNode* predNode = findPredecessor(pRoot, targetNode);
+   if (predNode == nullptr) {
       throw -1;
    }
-   TextNode* predNode = findpPredecessor(pRoot, targetNode);
    if (predNode->pNext == targetNode) {
       if (targetNode->pDown != nullptr) {
          if (predNode->pDown == nullptr) {
@@ -171,4 +174,63 @@ void TextTree::removeNodeAdoptChildren(TextNode* targetNode) {
    targetNode->pNext = nullptr;
    targetNode->pDown = nullptr;
    delete targetNode;
+}
+
+TextNode* TextTree::findParent(TextNode* currNode, TextNode* targetNode) {
+   if (currNode == nullptr || targetNode == nullptr) {
+      return nullptr;
+   }
+   TextNode* child = currNode->pDown;
+   while (child) {
+      if (child == targetNode) {
+         return currNode;
+      }
+      child = child->pNext;
+   }
+   TextNode* res = findParent(currNode->pDown, targetNode);
+   if (res != nullptr) {
+      return res;
+   }
+   return findParent(currNode->pNext, targetNode);
+}
+
+TextNode* TextTree::addSplit(TextNode* tNode, const std::string& _text) {
+   if (tNode == nullptr || tNode == pRoot) {
+      throw -1;
+   }
+   TextNode* parent = findParent(pRoot, tNode);
+   if (parent == nullptr) {
+      throw -1;
+   }
+   TextNode* newNode = new TextNode(_text);
+
+   newNode->pDown = tNode->pNext;
+   tNode->pNext = nullptr;
+
+   newNode->pNext = parent->pNext;
+   parent->pNext = newNode;
+
+   return newNode;
+}
+
+TextNode* TextTree::addNextFront(TextNode* parent, const std::string& _text) {
+   TextNode* prevNode = parent->pNext;
+
+   TextNode* newNode = new TextNode(_text);
+
+   newNode->pNext = prevNode;
+   parent->pNext = newNode;
+
+   return newNode;
+}
+
+TextNode* TextTree::addDownFront(TextNode* parent, const std::string& _text) {
+   TextNode* prevNode = parent->pDown;
+
+   TextNode* newNode = new TextNode(_text);
+
+   newNode->pNext = prevNode;
+   parent->pDown = newNode;
+
+   return newNode;
 }

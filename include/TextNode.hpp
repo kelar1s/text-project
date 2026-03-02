@@ -14,5 +14,5 @@ class TextNode {
 
   public:
    const std::string& getText() const { return text; }
-   void setText(const std::string& _text = "") { text = _text; }
+   void setText(const std::string& _text) { text = _text; }
 };

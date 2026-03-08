@@ -2,16 +2,18 @@
 
 #include <string>
 
+TextTree::TextTree() : pRoot(nullptr) {}
+
 TextTree::~TextTree() { removeNodeWithAllDependencies(pRoot); }
 
-void TextTree::removeNodeWithAllDependencies(TextNode* tNode) {
-   if (tNode == nullptr) {
+void TextTree::removeNodeWithAllDependencies(TextNode* currNode) {
+   if (currNode == nullptr) {
       return;
    }
-   removeNodeWithAllDependencies(tNode->pDown);
-   removeNodeWithAllDependencies(tNode->pNext);
+   removeNodeWithAllDependencies(currNode->pDown);
+   removeNodeWithAllDependencies(currNode->pNext);
 
-   delete tNode;
+   delete currNode;
 }
 
 TextNode* TextTree::setRoot(const std::string& _text) {
@@ -23,57 +25,29 @@ TextNode* TextTree::setRoot(const std::string& _text) {
    return pRoot;
 }
 
-TextNode* TextTree::addNextBack(TextNode* parent, const std::string& _text) {
-   if (parent == nullptr || parent == pRoot) {
-      throw -1;
-   }
-
-   TextNode* current = parent;
-   while (current->pNext != nullptr) {
-      current = current->pNext;
-   }
-   current->pNext = new TextNode(_text);
-   return current->pNext;
-}
-
-TextNode* TextTree::addDownBack(TextNode* parent, const std::string& _text) {
-   if (parent == nullptr) {
-      throw -1;
-   }
-   if (parent->pDown == nullptr) {
-      return parent->pDown = new TextNode(_text);
-   }
-   TextNode* current = parent->pDown;
-
-   while (current->pNext != nullptr) {
-      current = current->pNext;
-   }
-   return current->pNext = new TextNode(_text);
-}
-
 TextIterator TextTree::begin() { return TextIterator(pRoot); }
 
 TextIterator TextTree::end() { return TextIterator(nullptr); }
 
 std::string TextTree::toString() const { return recursivePrint(pRoot, 0); }
 
-std::string TextTree::recursivePrint(const TextNode* tNode,
+std::string TextTree::recursivePrint(const TextNode* currNode,
                                      size_t indent) const {
-   if (tNode == nullptr) {
+   if (currNode == nullptr) {
       return "";
    }
 
    std::string res = "";
    res.append(indent, ' ');
    res += "- ";
-   res += tNode->text + "\n";
+   res += currNode->text + "\n";
 
-   if (tNode->pDown) {
-      res += recursivePrint(tNode->pDown, indent + 2);
+   if (currNode->pDown) {
+      res += recursivePrint(currNode->pDown, indent + 2);
    }
 
-   if (tNode->pNext) {
-      res += recursivePrint(tNode->pNext, indent);
+   if (currNode->pNext) {
+      res += recursivePrint(currNode->pNext, indent);
    }
 
    return res;
@@ -194,18 +168,18 @@ TextNode* TextTree::findParent(TextNode* currNode, TextNode* targetNode) {
    return findParent(currNode->pNext, targetNode);
 }
 
-TextNode* TextTree::addSplit(TextNode* tNode, const std::string& _text) {
-   if (tNode == nullptr || tNode == pRoot) {
+TextNode* TextTree::addSplit(TextNode* currNode, const std::string& _text) {
+   if (currNode == nullptr || currNode == pRoot) {
       throw -1;
    }
-   TextNode* parent = findParent(pRoot, tNode);
+   TextNode* parent = findParent(pRoot, currNode);
    if (parent == nullptr) {
       throw -1;
    }
    TextNode* newNode = new TextNode(_text);
 
-   newNode->pDown = tNode->pNext;
-   tNode->pNext = nullptr;
+   newNode->pDown = currNode->pNext;
+   currNode->pNext = nullptr;
 
    newNode->pNext = parent->pNext;
    parent->pNext = newNode;
@@ -213,24 +187,65 @@ TextNode* TextTree::addSplit(TextNode* tNode, const std::string& _text) {
    return newNode;
 }
 
-TextNode* TextTree::addNextFront(TextNode* parent, const std::string& _text) {
-   TextNode* prevNode = parent->pNext;
+TextNode* TextTree::addNextAfter(TextNode* currNode, const std::string& _text) {
+   TextNode* prevNode = currNode->pNext;
 
    TextNode* newNode = new TextNode(_text);
 
    newNode->pNext = prevNode;
-   parent->pNext = newNode;
+   currNode->pNext = newNode;
 
    return newNode;
 }
 
-TextNode* TextTree::addDownFront(TextNode* parent, const std::string& _text) {
-   TextNode* prevNode = parent->pDown;
+TextNode* TextTree::addNextBefore(TextNode* currNode,
+                                  const std::string& _text) {
+   if (currNode == nullptr || currNode == pRoot) {
+      throw -1;
+   }
+   TextNode** ptrToCurrNode = findPointerTo(&pRoot, currNode);
+   if (ptrToCurrNode == nullptr) {
+      throw -1;
+   }
+
+   TextNode* newNode = new TextNode(_text);
+   newNode->pNext = *ptrToCurrNode;
+   *ptrToCurrNode = newNode;
+
+   return newNode;
+}
+
+TextNode* TextTree::addDownAfter(TextNode* currNode, const std::string& _text) {
+   TextNode* prevNode = currNode->pDown;
 
    TextNode* newNode = new TextNode(_text);
 
    newNode->pNext = prevNode;
-   parent->pDown = newNode;
+   currNode->pDown = newNode;
 
    return newNode;
+}
+
+TextNode* TextTree::raiseLevel(TextNode* currNode) {
+   if (currNode == nullptr || currNode == pRoot) {
+      throw -1;
+   }
+
+   if (currNode->pDown != nullptr) {
+      throw -1;
+   }
+
+   TextNode** ptrToCurrNode = findPointerTo(&pRoot, currNode);
+   if (ptrToCurrNode == nullptr) {
+      throw -1;
+   }
+   TextNode* parent = findParent(pRoot, currNode);
+   if (parent == pRoot || parent == nullptr) {  // TODO: split with exceptions
+      throw -1;
+   }
+   *ptrToCurrNode = currNode->pNext;
+   currNode->pNext = parent->pNext;
+   parent->pNext = currNode;
+
+   return currNode;
 }

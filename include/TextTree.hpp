@@ -6,28 +6,29 @@
 class TextTree {
    TextNode* pRoot;
 
-   void removeNodeWithAllDependencies(TextNode* tNode);
-   std::string recursivePrint(const TextNode* tNode, size_t indent) const;
+   void removeNodeWithAllDependencies(TextNode* currNode);
+   std::string recursivePrint(const TextNode* currNode, size_t indent) const;
 
    TextNode** findPointerTo(TextNode** currNode, TextNode* targetNode);
    TextNode* findPredecessor(TextNode* currNode, TextNode* targetNode);
    TextNode* findParent(TextNode* currNode, TextNode* targetNode);
 
   public:
-   TextTree() : pRoot(nullptr) {}
+   TextTree();
    ~TextTree();
 
    TextNode* setRoot(const std::string& _text);
 
-   TextNode* addNextBack(TextNode* parent, const std::string& _text);
-   TextNode* addDownBack(TextNode* parent, const std::string& _text);
-   TextNode* addNextFront(TextNode* parent, const std::string& _text);
-   TextNode* addDownFront(TextNode* parent, const std::string& _text);
-   TextNode* addSplit(TextNode* tNode, const std::string& _text);
+   TextNode* addNextAfter(TextNode* currNode, const std::string& _text);
+   TextNode* addNextBefore(TextNode* currNode, const std::string& _text);
+   TextNode* addDownAfter(TextNode* currNode, const std::string& _text);
+   TextNode* addSplit(TextNode* currNode, const std::string& _text);
 
    void removeSubtree(TextNode* targetNode);
    void removeNodeUpChildren(TextNode* targetNode);
    void removeNodeAdoptChildren(TextNode* targetNode);
+
+   TextNode* raiseLevel(TextNode* currNode);
 
    TextIterator begin();
    TextIterator end();

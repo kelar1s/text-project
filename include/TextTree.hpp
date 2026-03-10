@@ -29,6 +29,7 @@ class TextTree {
    void removeNodeAdoptChildren(TextNode* targetNode);
 
    TextNode* raiseLevel(TextNode* currNode);
+   TextNode* lowerLevel(TextNode* currNode);
 
    TextIterator begin();
    TextIterator end();

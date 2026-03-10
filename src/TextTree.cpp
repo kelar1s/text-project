@@ -173,7 +173,7 @@ TextNode* TextTree::addSplit(TextNode* currNode, const std::string& _text) {
       throw -1;
    }
    TextNode* parent = findParent(pRoot, currNode);
-   if (parent == nullptr) {
+   if (parent == nullptr || parent == pRoot) {
       throw -1;
    }
    TextNode* newNode = new TextNode(_text);
@@ -240,12 +240,39 @@ TextNode* TextTree::raiseLevel(TextNode* currNode) {
       throw -1;
    }
    TextNode* parent = findParent(pRoot, currNode);
-   if (parent == pRoot || parent == nullptr) {  // TODO: split with exceptions
+   if (parent == pRoot || parent == nullptr) {  // ! TODO: split with exceptions
       throw -1;
    }
    *ptrToCurrNode = currNode->pNext;
    currNode->pNext = parent->pNext;
    parent->pNext = currNode;
 
+   return currNode;
+}
+
+TextNode* TextTree::lowerLevel(TextNode* currNode){
+   if(currNode == nullptr || currNode == pRoot){
+      throw -1;
+   }
+   
+   TextNode* predNode = findPredecessor(pRoot, currNode);
+   if(predNode == nullptr){
+      throw -1;
+   }
+   if(predNode->pDown == currNode){
+      return currNode; // ? throw
+   }
+   
+   predNode->pNext = currNode->pNext;
+
+   if(predNode->pDown == nullptr){
+      predNode->pDown = currNode;
+   } else {
+      TextNode *child = predNode->pDown;
+      while(child->pNext != nullptr){
+         child = child->pNext;
+      }
+      child->pNext = currNode;
+   }
    return currNode;
 }

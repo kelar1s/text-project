@@ -1,1 +1,0 @@
-/usr/bin/clang++ -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/text_project.dir/src/TextIterator.cpp.o CMakeFiles/text_project.dir/src/TextTree.cpp.o CMakeFiles/text_project.dir/src/main.cpp.o -o text_project

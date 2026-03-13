@@ -231,7 +231,7 @@ TextNode* TextTree::raiseLevel(TextNode* currNode) {
       throw -1;
    }
 
-   if (currNode->pDown != nullptr) {
+   if (currNode->pDown != nullptr) {  // ! Question on next meetup
       throw -1;
    }
 
@@ -243,36 +243,43 @@ TextNode* TextTree::raiseLevel(TextNode* currNode) {
    if (parent == pRoot || parent == nullptr) {  // ! TODO: split with exceptions
       throw -1;
    }
-   *ptrToCurrNode = currNode->pNext;
-   currNode->pNext = parent->pNext;
+   *ptrToCurrNode = nullptr;
+   TextNode* lastBrother = currNode;
+   while (currNode->pNext != nullptr) {
+      lastBrother = lastBrother->pNext;
+   }
+   lastBrother->pNext = parent->pNext;
    parent->pNext = currNode;
 
    return currNode;
 }
 
-TextNode* TextTree::lowerLevel(TextNode* currNode){
-   if(currNode == nullptr || currNode == pRoot){
+TextNode* TextTree::lowerLevel(TextNode* currNode) {
+   if (currNode == nullptr || currNode == pRoot) {
       throw -1;
    }
-   
+
    TextNode* predNode = findPredecessor(pRoot, currNode);
-   if(predNode == nullptr){
+   if (predNode == nullptr) {
       throw -1;
    }
-   if(predNode->pDown == currNode){
-      return currNode; // ? throw
+   if (predNode->pDown == currNode) {
+      return currNode;  // ? throw
    }
-   
+
    predNode->pNext = currNode->pNext;
 
-   if(predNode->pDown == nullptr){
+   if (predNode->pDown == nullptr) {
       predNode->pDown = currNode;
    } else {
-      TextNode *child = predNode->pDown;
-      while(child->pNext != nullptr){
+      TextNode* child = predNode->pDown;
+      while (child->pNext != nullptr) {
          child = child->pNext;
       }
       child->pNext = currNode;
    }
+   currNode->pNext = currNode->pDown;
+   currNode->pDown = nullptr;
+
    return currNode;
 }

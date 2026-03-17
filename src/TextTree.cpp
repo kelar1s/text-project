@@ -244,12 +244,10 @@ TextNode* TextTree::raiseLevel(TextNode* currNode) {
       throw -1;
    }
    *ptrToCurrNode = nullptr;
-   TextNode* lastBrother = currNode;
-   while (currNode->pNext != nullptr) {
-      lastBrother = lastBrother->pNext;
-   }
-   lastBrother->pNext = parent->pNext;
    parent->pNext = currNode;
+   
+   currNode->pDown = currNode->pNext;
+   currNode->pNext = nullptr;
 
    return currNode;
 }

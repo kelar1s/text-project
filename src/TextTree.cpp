@@ -73,11 +73,11 @@ TextNode** TextTree::findPointerTo(TextNode** currNode, TextNode* targetNode) {
 
 void TextTree::removeSubtree(TextNode* targetNode) {
    if (targetNode == nullptr) {
-      throw -1;
+      throw InvalidNodeException("targetNode is nullptr.");
    }
    TextNode** pointerToTarget = findPointerTo(&pRoot, targetNode);
    if (pointerToTarget == nullptr) {
-      throw -1;
+      throw NodeNotFoundException();
    }
    *pointerToTarget = targetNode->pNext;
    targetNode->pNext = nullptr;
@@ -86,12 +86,15 @@ void TextTree::removeSubtree(TextNode* targetNode) {
 }
 
 void TextTree::removeNodeUpChildren(TextNode* targetNode) {
-   if (targetNode == nullptr || targetNode == pRoot) {
-      throw -1;
+   if (targetNode == nullptr) {
+      throw InvalidNodeException("Node is nullptr.");
+   }
+   if(targetNode == pRoot){
+      InvalidNodeException("Cannot remove pRoot with level up.");
    }
    TextNode** pointerToTarget = findPointerTo(&pRoot, targetNode);
    if (pointerToTarget == nullptr) {
-      throw -1;
+      throw NodeNotFoundException();
    }
    if (targetNode->pDown == nullptr) {
       *pointerToTarget = targetNode->pNext;
@@ -121,12 +124,17 @@ TextNode* TextTree::findPredecessor(TextNode* currNode, TextNode* targetNode) {
 }
 
 void TextTree::removeNodeAdoptChildren(TextNode* targetNode) {
-   if (targetNode == nullptr || targetNode == pRoot) {
-      throw -1;
+   if (targetNode == nullptr) {
+      throw InvalidNodeException("Node is nullptr.");
    }
+
+   if(targetNode == pRoot){
+      InvalidNodeException("Cannot remove pRoot with adopting.");
+   }
+
    TextNode* predNode = findPredecessor(pRoot, targetNode);
    if (predNode == nullptr) {
-      throw -1;
+      throw NodeNotFoundException();
    }
    if (predNode->pNext == targetNode) {
       if (targetNode->pDown != nullptr) {
@@ -169,12 +177,20 @@ TextNode* TextTree::findParent(TextNode* currNode, TextNode* targetNode) {
 }
 
 TextNode* TextTree::addSplit(TextNode* currNode, const std::string& _text) {
-   if (currNode == nullptr || currNode == pRoot) {
-      throw -1;
+   if (currNode == nullptr) {
+      throw InvalidNodeException("Node is nullptr.");
    }
+
+   if(currNode == pRoot){
+      InvalidNodeException("Node cannot be pRoot.");
+   }
+
    TextNode* parent = findParent(pRoot, currNode);
-   if (parent == nullptr || parent == pRoot) {
-      throw -1;
+   if (parent == nullptr) {
+      throw NodeNotFoundException();
+   }
+   if (parent == pRoot) {
+      throw InvalidNodeException("Node cannot be 1 level lower than the pRoot.");
    }
    TextNode* newNode = new TextNode(_text);
 
@@ -188,6 +204,12 @@ TextNode* TextTree::addSplit(TextNode* currNode, const std::string& _text) {
 }
 
 TextNode* TextTree::addNextAfter(TextNode* currNode, const std::string& _text) {
+   if (currNode == nullptr) {
+      throw InvalidNodeException("Node is nullptr.");
+   }
+   if (currNode == pRoot) {
+      throw InvalidNodeException("Node cannot be pRoot.");
+   }
    TextNode* prevNode = currNode->pNext;
 
    TextNode* newNode = new TextNode(_text);
@@ -200,12 +222,15 @@ TextNode* TextTree::addNextAfter(TextNode* currNode, const std::string& _text) {
 
 TextNode* TextTree::addNextBefore(TextNode* currNode,
                                   const std::string& _text) {
-   if (currNode == nullptr || currNode == pRoot) {
-      throw -1;
+   if (currNode == nullptr) {
+      throw InvalidNodeException("Node is nullptr.");
+   }
+   if (currNode == pRoot) {
+      throw InvalidNodeException("Node cannot be pRoot.");
    }
    TextNode** ptrToCurrNode = findPointerTo(&pRoot, currNode);
    if (ptrToCurrNode == nullptr) {
-      throw -1;
+      throw NodeNotFoundException();
    }
 
    TextNode* newNode = new TextNode(_text);
@@ -227,42 +252,60 @@ TextNode* TextTree::addDownAfter(TextNode* currNode, const std::string& _text) {
 }
 
 TextNode* TextTree::raiseLevel(TextNode* currNode) {
-   if (currNode == nullptr || currNode == pRoot) {
-      throw -1;
+   if (currNode == nullptr) {
+      throw InvalidNodeException("Node is nullptr.");
    }
-
-   if (currNode->pDown != nullptr) {  // ! Question on next meetup
-      throw -1;
+   if (currNode == pRoot) {
+      throw InvalidNodeException("Cannot raise pRoot level.");
    }
 
    TextNode** ptrToCurrNode = findPointerTo(&pRoot, currNode);
    if (ptrToCurrNode == nullptr) {
-      throw -1;
+      throw NodeNotFoundException();
    }
    TextNode* parent = findParent(pRoot, currNode);
-   if (parent == pRoot || parent == nullptr) {  // ! TODO: split with exceptions
-      throw -1;
+   if (parent == nullptr) {
+      throw NodeNotFoundException();
    }
+   if (parent == pRoot) {
+      throw InvalidNodeException("Node cannot be 1 level lower than the pRoot.");
+   }
+
    *ptrToCurrNode = nullptr;
-   parent->pNext = currNode;
    
-   currNode->pDown = currNode->pNext;
-   currNode->pNext = nullptr;
+   if(currNode->pDown == nullptr){
+      currNode->pDown = currNode->pNext;
+   } else {
+      TextNode *child = currNode->pDown;
+      while(child->pNext != nullptr){
+         child = child->pNext;
+      }
+      child->pNext = currNode->pNext;
+   }
+
+   currNode->pNext = parent->pNext;
+   parent->pNext = currNode;
 
    return currNode;
 }
 
 TextNode* TextTree::lowerLevel(TextNode* currNode) {
-   if (currNode == nullptr || currNode == pRoot) {
-      throw -1;
+   if (currNode == nullptr) {
+      throw InvalidNodeException("Node is nullptr.");
+   }
+   if (currNode == pRoot) {
+      throw InvalidNodeException("Cannot lower pRoot level.");
    }
 
    TextNode* predNode = findPredecessor(pRoot, currNode);
    if (predNode == nullptr) {
-      throw -1;
+      throw NodeNotFoundException();
+   }
+   if (predNode == pRoot) {
+      throw InvalidNodeException("Node cannot be level lower.");
    }
    if (predNode->pDown == currNode) {
-      return currNode;  // ? throw
+      throw InvalidNodeException("Node cannot be level lower.");
    }
 
    predNode->pNext = currNode->pNext;

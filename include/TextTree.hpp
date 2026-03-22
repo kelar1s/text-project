@@ -2,6 +2,7 @@
 
 #include "TextIterator.hpp"
 #include "TextNode.hpp"
+#include "TextTreeExceptions.hpp"
 
 class TextTree {
    TextNode* pRoot;
@@ -18,6 +19,7 @@ class TextTree {
    ~TextTree();
 
    TextNode* setRoot(const std::string& _text);
+   TextNode* getRoot() const { return pRoot; }
 
    TextNode* addNextAfter(TextNode* currNode, const std::string& _text);
    TextNode* addNextBefore(TextNode* currNode, const std::string& _text);

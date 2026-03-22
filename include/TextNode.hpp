@@ -13,6 +13,9 @@ class TextNode {
        : text(_text), pNext(nullptr), pDown(nullptr) {}
 
   public:
+   TextNode* getDown() const { return pDown; }
+   TextNode* getNext() const { return pNext; }
+   
    const std::string& getText() const { return text; }
    void setText(const std::string& _text) { text = _text; }
 };

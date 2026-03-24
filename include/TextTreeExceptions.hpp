@@ -18,3 +18,9 @@ public:
     explicit InvalidNodeException(const std::string& message) 
         : TextTreeException("Error: " + message) {}
 };
+
+class NodeNotSelectedException : public TextTreeException {
+public:
+    NodeNotSelectedException() 
+        : TextTreeException("Error: Node not selected!") {}
+};

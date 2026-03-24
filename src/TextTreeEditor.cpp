@@ -15,12 +15,11 @@ const std::string COLOR_RESET = "\033[0m";
 
 TextTreeEditor::TextTreeEditor() : selectedIndex(0), lastMessage("") {
     tree.setRoot("pRoot: Document");
-
 }
 
 void TextTreeEditor::run()
 {
-   bool isRunning = true;
+    bool isRunning = true;
     while (isRunning) {
         std::vector<TextNode*> displayList;
         TreeToList(tree.getRoot(), displayList);
@@ -74,7 +73,7 @@ int TextTreeEditor::getKeystroke() const {
 
 void TextTreeEditor::TreeToList(TextNode *node, std::vector<TextNode *> &list) const
 {
-   if (node == nullptr) return;
+    if (node == nullptr) return;
     list.push_back(node);
     TreeToList(node->getDown(), list);
     TreeToList(node->getNext(), list);
@@ -82,7 +81,7 @@ void TextTreeEditor::TreeToList(TextNode *node, std::vector<TextNode *> &list) c
 
 void TextTreeEditor::PrintTree(TextNode *currNode, size_t indent, TextNode *selectedNode) const
 {
-   if (currNode == nullptr) return;
+    if (currNode == nullptr) return;
 
     std::string indentStr(indent, ' ');
     std::cout << indentStr << "- ";
@@ -107,7 +106,7 @@ std::string TextTreeEditor::promptForText(const std::string &prompt) const
 
 void TextTreeEditor::drawInterface(const std::vector<TextNode *> &displayList)
 {
-   clearScreen();
+    clearScreen();
     
     if (displayList.empty()) {
         std::cout << "Tree is empty.\n";
@@ -136,7 +135,7 @@ void TextTreeEditor::drawInterface(const std::vector<TextNode *> &displayList)
 
 bool TextTreeEditor::processInput(int key, std::vector<TextNode *> &displayList)
 {
-   TextNode* targetNode = displayList.empty() ? nullptr : displayList[selectedIndex];
+    TextNode* targetNode = displayList.empty() ? nullptr : displayList[selectedIndex];
     lastMessage = "";
 
     try {
@@ -150,7 +149,7 @@ bool TextTreeEditor::processInput(int key, std::vector<TextNode *> &displayList)
             return false;
         } 
         else if (key >= '1' && key <= '4') {
-            if (!targetNode) throw std::runtime_error("No node selected!");
+            if (!targetNode) throw NodeNotSelectedException();
             std::cout << "\n";
             std::string text = promptForText("Enter text for new node: ");
             
@@ -162,7 +161,7 @@ bool TextTreeEditor::processInput(int key, std::vector<TextNode *> &displayList)
             lastMessage = "Node added successfully.";
         } 
         else if (key >= '5' && key <= '9') {
-            if (!targetNode) throw std::runtime_error("No node selected!");
+            if (!targetNode) throw NodeNotSelectedException();
             
             if (key == '5') tree.raiseLevel(targetNode);
             if (key == '6') tree.lowerLevel(targetNode);
@@ -173,7 +172,7 @@ bool TextTreeEditor::processInput(int key, std::vector<TextNode *> &displayList)
             lastMessage = "Operation completed successfully.";
         } 
         else if (key == 'u' || key == 'p') {
-            if (!targetNode) throw std::runtime_error("No node selected!");
+            if (!targetNode) throw NodeNotSelectedException();
             std::cout << "\n";
             std::string text = promptForText("Enter text for new node: ");
 
